@@ -1,29 +1,44 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <el-menu :default-active="activeIndex" mode="horizontal">
+      <el-menu-item index="1" @click="goToTable">myTable</el-menu-item>
+      <el-menu-item index="2" @click="goToCharts">myCharts</el-menu-item>
+      </el-menu>
+      <div>
+        <keep-alive>
+          <component :is="currentComp"></component>
+        </keep-alive>
+      </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
-export default Vue.extend({
-  name: 'app',
+import MyCharts from './examples/myCharts.vue'
+import MyTable from './examples/myTable.vue'
+
+@Component({
   components: {
-    HelloWorld
+    MyCharts,
+    MyTable
   }
-});
+})
+export default class App extends Vue{
+
+  activeIndex: string = '2'
+  currentComp: string = 'myCharts'
+
+  goToCharts (): void {
+      this.currentComp = 'myCharts'
+  }
+
+  goToTable (): void {
+    this.currentComp = 'myTable'
+  }
+}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
