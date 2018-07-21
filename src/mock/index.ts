@@ -17,7 +17,7 @@ export function getTableData(): tableApiData {
 
 export function getPieChartData(): pieApiData {
   return Mock.mock({
-    'data|6-10': [
+    'data|4-6': [
       {
         'value|100-200': 1,
         'name': '@cname'

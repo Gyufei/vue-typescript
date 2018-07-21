@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 import echarts from 'echarts'
 
@@ -46,6 +46,19 @@ export default class Chart extends Vue{
       width: `${this.width}px`,
       height: `${this.height}px`
     }
+  }
+
+  @Watch('chartOptions')
+  onChartOptionsChange (val: object) {
+    const chartDOM: HTMLElement | null = document.getElementById(`${this.chartId}`)
+
+    if (!chartDOM) return
+    let chart = echarts.getInstanceByDom(<HTMLDivElement>chartDOM)
+    if (!chart) {
+      chart = echarts.init(<HTMLDivElement>chartDOM)
+    }
+
+    chart.setOption(val)
   }
 
   mounted () {
