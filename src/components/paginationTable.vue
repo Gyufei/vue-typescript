@@ -3,7 +3,6 @@
     <div class="table">
       <el-table
         :data="tableData">
-        <slot name="tbody"></slot>
       </el-table>
     </div>
     <div class="pagination">
@@ -79,7 +78,7 @@ export default class PaginationTable extends tableProp {
 }
 </script>
 
-<style>
+<style lang="css" scoped>
   .pagination {
     text-align: center;
   }
